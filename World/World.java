@@ -1,5 +1,5 @@
 package World;
-import types.*;
+import Types.*;
 
 public class World
 {
@@ -19,6 +19,16 @@ public class World
 			public bodypart mao[] = new bodypart[2];
 			public bodypart perna[] = new bodypart[2];
 			public bodypart pe[] = new bodypart[2];
+			public Body()
+			{
+				for(int i = 0;i<2;i++)
+				{
+					braco[i] = new bodypart();
+					mao[i] = new bodypart();
+					perna[i] = new bodypart();
+					pe[i] = new bodypart();
+				}
+			}
 		}
 		public String name = "ninguem";
 		public String status = "normal";
@@ -28,10 +38,16 @@ public class World
 		public double dex = 1.0;
 		public vec3 position = new vec3();
 		Body body = new Body();
+		
 	}
 	public class Creatures
 	{
 		public Human human[] = new Human[64];
 	}
 	public Creatures creature = new Creatures();
+	public World()
+	{
+		for(int i = 0;i<64;i++)
+			creature.human[i] = new Human();
+	}
 }
