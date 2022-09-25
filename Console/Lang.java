@@ -3,8 +3,9 @@ package Console;
 public class Lang
 {
 	//actions
-	private static String make[] = {"make","mk","create","new"};//make (creature||object||item) (id) (vector3)
-	private static String move[] = {"move","mov","mv"};//move (creature||object||item) (id) (direction)
+	private static String make[] = {"make","mk","create","new"};// (object) (id) mk {object properties in order}
+	private static String move[] = {"move","mov","mv"};//(object) (id) move (direction)
+	private static String moveTo[] = {"moveto","movto","mvto","moveTo","mvt"};//moveTo (creature||object||item) (id) (direction)
 	private static String exit[] = {"exit","quit"};//exit program
 	//operators
 	private static String then[] = {"and","&","&&","then"};// {action} then {action}
@@ -34,6 +35,7 @@ public class Lang
 		{
 			//actions
 			if(check(move,in[i])) cmd += "mv ";
+			else if(check(moveTo,in[i])) cmd += "mvt ";
 			else if(check(make,in[i])) cmd += "mk ";
 			//operators
 			else if(check(then,in[i])) cmd += "&";

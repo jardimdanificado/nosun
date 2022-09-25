@@ -11,43 +11,38 @@ public class Aurelio
 		world = inW;
 	}
 
-	private void doMove(String d, int index)
+	private void moveTo(String[] lmd, vec3 position)//(object) (index||name) moveTo (vec3)
 	{
-		switch(d)
+		vec3 lvec = new vec3();
+		lvec.fromString(lmd[3]);
+		position = lvec;
+	}
+
+	private void move(String[] lmd, vec3 position)//(object) (index||name) move
+	{
+		switch(lmd[3])
 		{
 			case "n":
 			{
-				world.creature.human[index].position.y++;
+				position.y++;
 			}
 			break;
 			case "s":
 			{
-				world.creature.human[index].position.y--;
+				position.y--;
 			}
 			break;
 			case "w":
 			{
-				world.creature.human[index].position.x++;
+				position.x++;
 			}
 			break;
 			case "e":
 			{
-				world.creature.human[index].position.x--;
+				position.x--;
 			}
 			break;
 		}
-	}
-	
-	private void move(String[] lmd)
-	{
-		int localV = Integer.parseInt(lmd[2]);
-		
-		if(!(localV != localV))//if true it is NaN
-			doMove(lmd[1],localV);
-		else
-			for(int k = 0;k<64;k++)
-				if(world.creature.human[k].name == lmd[2])
-					doMove(lmd[1],localV);
 	}
 
 	public boolean interpreter(String[] in)
@@ -57,9 +52,18 @@ public class Aurelio
 			String[] lmd = l.translate(in).split(" ");
 			switch(lmd[0])
 			{
-				case "mv":
+				case "human":
 				{
-					move(lmd);
+					//finder
+					int r = Integer.parseInt(lmd[1]);
+					if(r != r)//if true it is NaN
+						for(int k = 0;k<64;k++)
+							if(world.creature.human[k].name == lmd[1])
+								r = k;
+					//acts
+					if(lmd[2].equals("mv")) move(lmd,world.creature.human[r].position);
+					else if(lmd[2].equals("mvt")) moveTo(lmd,world.creature.human[r].position);
+					else if(lmd[2].equals("del")) human[r] = new Human();
 				}
 				break;
 				case "exit":

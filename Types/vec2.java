@@ -9,4 +9,11 @@ public class vec2
 		x = inX;
 		y = inY;
 	}
+	public void fromString(String in)
+	{
+		String[] lstr = in.split(",");
+		if(lstr.length !=2) lstr = in.split("x");
+		x = Integer.parseInt(lstr[0]);
+		y = Integer.parseInt(lstr[1]);
+	}
 }

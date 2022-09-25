@@ -11,4 +11,12 @@ public class vec3
 		y = inY;
 		z = inZ;
 	}
+	public void fromString(String in)
+	{
+		String[] lstr = in.split(",");
+		if(lstr.length !=3) lstr = in.split("x");
+		x = Integer.parseInt(lstr[0]);
+		y = Integer.parseInt(lstr[1]);
+		z = Integer.parseInt(lstr[2]);
+	}
 }
