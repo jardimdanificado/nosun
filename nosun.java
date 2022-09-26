@@ -1,15 +1,15 @@
-import Program.*;
+import java.util.Scanner;
+import Types.World;
 
 class nosun
 {
     public static void main(String[] args) 
     {
-    	Program sistema = new Program();
-		while(sistema.exit == false)
+    	boolean exit = false;
+    	World world = new World();
+		while(exit == false)
         {
         	System.out.println("o sol apagou, oque vc vai fazer?");
-			sistema.run();
-//        	sistema.exit = true;
         }
     }
 }

@@ -1,24 +1,44 @@
 package Console;
 import Types.*;
-import World.World;
 
 public class Aurelio
 {
-	private Lang l = new Lang();
-	private World world;
-	public Aurelio(World inW)
+	public static String translate(String[] in)
 	{
-		world = inW;
+		String cmd = new String();
+		for(int i = 0; i<in.length;i++)
+		{
+			//actions
+			if(check(move,in[i])) cmd += "mv ";
+			else if(check(moveTo,in[i])) cmd += "mvt ";
+			else if(check(make,in[i])) cmd += "mk ";
+			//operators
+			else if(check(then,in[i])) cmd += "&";
+			else if(check(equal,in[i])) cmd += " = ";
+			//directions
+			else if(check(north,in[i])) cmd += "n";
+			else if(check(south,in[i])) cmd += "s";
+			else if(check(west,in[i])) cmd += "w";
+			else if(check(east,in[i])) cmd += "e";
+			//creatures
+			else if(check(human,in[i])) cmd += "h";
+			//system
+			else if(check(exit,in[i])) cmd += "exit";
+			//else/values
+			else cmd += in[i];
+		}
+		//cmd+="&nd";
+		return(cmd);
 	}
-
-	private void moveTo(String[] lmd, vec3 position)//(object) (index||name) moveTo (vec3)
+	
+	private void moveTo(String[] lmd, vec3 position)//(object):(index||name) moveTo (vec3)
 	{
 		vec3 lvec = new vec3();
 		lvec.fromString(lmd[3]);
 		position = lvec;
 	}
 
-	private void move(String[] lmd, vec3 position)//(object) (index||name) move
+	private void move(String[] lmd, vec3 position)//(object):(index||name) move (direction)
 	{
 		switch(lmd[3])
 		{
@@ -50,6 +70,7 @@ public class Aurelio
 		for(int i = 0; i<in.length;i++)
 		{
 			String[] lmd = l.translate(in).split(" ");
+			String[] objid = lmd[0].split(":");
 			switch(lmd[0])
 			{
 				case "human":
