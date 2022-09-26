@@ -1,4 +1,4 @@
-package Types;
+package Est;
 
 public class Constants
 {
@@ -7,7 +7,7 @@ public class Constants
 		static int Objects = 256;
 		static int Atribute = Objects/4;
 	}
-	public static String gramatica[][] = 
+	public static String gramatic[][] = 
 	{
 		{"make","mk","create","new"},
 		{"move","mov","mv"},
