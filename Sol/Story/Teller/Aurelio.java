@@ -3,14 +3,7 @@ import Sol.Primitives.Vector3;
 
 public class Aurelio
 {	
-	private static String Vocabulary[][] = 
-	{
-		//acts
-		{"mk","make","new"},
-		{"mv","move","mov"},
-		{"mvt","moveto","movto","movt"},
-		{"human"}
-	};
+	
 	private void moveTo(String[] lmd, Vector3 position)//(object):(index||name) moveTo (vec3)
 	{
 		Vector3 lvec = new Vector3(lmd[3]);
@@ -44,8 +37,4 @@ public class Aurelio
 		}
 	}
 
-	public boolean interpreter(String[] in)
-	{
-
-	}
 }
