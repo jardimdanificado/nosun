@@ -11,6 +11,8 @@ public class Aurelius
 		else if(str.contains("$"))
 		{
 			String[] splited = str.split(" ");
+			for(int i =2;i<splited.length;i++)
+				splited[1] += (" " + splited[i]);
 			for(int i = 0; i< props.size();i++)
 			{
 				if(props.get(i).name.equals(splited[0]))
@@ -18,6 +20,8 @@ public class Aurelius
 					String[] func = splited[1].split("$");					
 					if(func[0].equals("pitagoras"))
 					{
+						func[1].replace("in",splited[2]);
+						func[1].replace("out",splited[3]);
 						Pitagoras.interpret(func[1],props);
 					}
 				}
