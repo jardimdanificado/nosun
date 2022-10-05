@@ -5,7 +5,7 @@ public class Pitagoras
 {
 	public static String interpret(String inCmd,ArrayList<Property> props)
 	{
-		String cmd = "nd";
+		String cmd = "0";
 		String[] splited = inCmd.split(" ");
 		if(splited[1].equals("+"))
 		{	
@@ -20,9 +20,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Double.parseDouble(splitSrc[i]);		
 					invec[i] = Double.parseDouble(splitValues[i]);
-					result = result + "," + (srcvec[i]+invec[i]);
+					result = ("" + result + (srcvec[i]+invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);
+				cmd = result;
 			}
 			else
 			{
@@ -33,9 +34,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Integer.parseInt(splitSrc[i]);		
 					invec[i] = Integer.parseInt(splitValues[i]);
-					result = result + "," + (srcvec[i]+invec[i]);
+					result = ("" + result + (srcvec[i]+invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);	
+				cmd = result;
 			}
 		}
 		else if(splited[1].equals("-"))
@@ -51,9 +53,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Double.parseDouble(splitSrc[i]);		
 					invec[i] = Double.parseDouble(splitValues[i]);
-					result = result + "," + (srcvec[i]-invec[i]);
+					result = ("" + result + (srcvec[i]-invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);
+				cmd = result;
 			}
 			else
 			{
@@ -64,9 +67,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Integer.parseInt(splitSrc[i]);		
 					invec[i] = Integer.parseInt(splitValues[i]);
-					result = result + "," + (srcvec[i]-invec[i]);
+					result = ("" + result + (srcvec[i]-invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);	
+				cmd = result;
 			}
 		}
 		else if(splited[1].equals("/"))
@@ -82,9 +86,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Double.parseDouble(splitSrc[i]);		
 					invec[i] = Double.parseDouble(splitValues[i]);
-					result = result + "," + (srcvec[i]/invec[i]);
+					result = ("" + result + (srcvec[i]/invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);
+				cmd = result;
 			}
 			else
 			{
@@ -95,9 +100,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Integer.parseInt(splitSrc[i]);		
 					invec[i] = Integer.parseInt(splitValues[i]);
-					result = result + "," + (srcvec[i]/invec[i]);
+					result = ("" + result + (srcvec[i]/invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);	
+				cmd = result;
 			}
 		}
 		else if(splited[1].equals("*"))
@@ -113,9 +119,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Double.parseDouble(splitSrc[i]);		
 					invec[i] = Double.parseDouble(splitValues[i]);
-					result = result + "," + (srcvec[i]*invec[i]);
+					result = ("" + result + (srcvec[i]*invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);
+				cmd = result;
 			}
 			else
 			{
@@ -126,9 +133,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Integer.parseInt(splitSrc[i]);		
 					invec[i] = Integer.parseInt(splitValues[i]);
-					result = result + "," + (srcvec[i]*invec[i]);
+					result = ("" + result + (srcvec[i]*invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);	
+				cmd = result;
 			}
 		}
 		else if(splited[1].equals("%"))
@@ -144,9 +152,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Double.parseDouble(splitSrc[i]);		
 					invec[i] = Double.parseDouble(splitValues[i]);
-					result = result + "," + (srcvec[i]%invec[i]);
+					result = ("" + result + (srcvec[i]*invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);
+				cmd = result;
 			}
 			else
 			{
@@ -157,9 +166,10 @@ public class Pitagoras
 				{
 					srcvec[i] = Integer.parseInt(splitSrc[i]);		
 					invec[i] = Integer.parseInt(splitValues[i]);
-					result = result + "," + (srcvec[i]%invec[i]);
+					result = ("" + result + (srcvec[i]*invec[i]) + ",");
 				}
 				Aurelius.interpret((splited[0] + " " + result),props);	
+				cmd = result;
 			}
 		}
 		return cmd;

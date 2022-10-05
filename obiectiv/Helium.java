@@ -8,7 +8,7 @@ public class Helium
 		String cmd = "nd";
 		String[] splited = inCmd.split(" ");
 		if(splited[1].equals("move"))
-			
+		{}
 		return cmd;
 	}
 }
