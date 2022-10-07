@@ -3,7 +3,7 @@ import obiectiv.Aurelius;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class nosun
+class sinesole
 {
 	public static void main(String[] args)
 	{

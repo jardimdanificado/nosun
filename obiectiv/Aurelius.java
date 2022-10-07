@@ -9,29 +9,40 @@ public class Aurelius
 		String[] splited = str.split(" ");
 		if(str.contains("exit"))
 			return "exit";
-		else if(str.contains(";"))
+		else if(str.contains(":"))
 		{
-			String[] func = str.split(";");
+			String[] func = str.split(":");
 			if(func.length == 2)
 				for(int i = 0; i< props.size();i++)
 				{
 					if(props.get(i).name.equals(func[0]))
 					{
 						String lstr = Aurelius.interpret(func[0],props);
-						System.out.println(lstr);
-						String[] savedFunc = lstr.split(";");
+						String[] savedFunc = lstr.split(":");
 						String locFunc = savedFunc[1];
-						if(savedFunc[0].equals("pitagoras"))
+						String[] mcheck = func[1].split(" ");
+						locFunc = locFunc.replace("out",mcheck[0]);
+						if(mcheck.length==2)
 						{
-							locFunc.replace("in",func[1]);
-							//func[1].replace("out",splited[3]);
-							Pitagoras.interpret(locFunc,props);
+							locFunc = locFunc.replace("in",mcheck[1]);
+							for(int d = 0;d<props.size();d++)
+								if(props.get(d).name.equals(mcheck[1]))
+								{
+									locFunc = locFunc.replace(mcheck[1], props.get(d).value);
+									break;
+								}
 						}
+						if(savedFunc[0].equals("pitagoras") || savedFunc[0].equals("p") || savedFunc[0].equals("math"))
+						{
+							System.out.println(locFunc);
+							return Pitagoras.interpret(locFunc,props);
+						}
+						break;
 					}
 				}
 			else
 			{
-				Property lprop = new Property(func[1],(func[0] + ";" + func[2]));
+				Property lprop = new Property(func[1],(func[0] + ":" + func[2]));
 				props.add(lprop);
 			}
 		}
