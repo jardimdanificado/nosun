@@ -1,176 +1,28 @@
 package obiectiv;
 import java.util.ArrayList;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
 
 public class Pitagoras
 {
+	private class parentese
+	{
+		int inicio,fim;
+		parentese(int in, int fi)
+		{
+			inicio = in;
+			fim = fi;
+		}
+	}
 	public static String interpret(String inCmd,ArrayList<Property> props)
 	{
-		String cmd = "0";
+		String cmd = "";
 		String[] splited = inCmd.split(" ");
-		if(splited[1].equals("+"))
-		{	
-			String[] splitSrc = Aurelius.interpret(splited[0],props).split(",");
-			String[] splitValues = splited[2].split(",");
-			if(splited[2].contains("."))
-			{
-				double[] srcvec = new double[splitValues.length];
-				double[] invec = new double[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Double.parseDouble(splitSrc[i]);		
-					invec[i] = Double.parseDouble(splitValues[i]);
-					result = ("" + result + (srcvec[i]+invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);
-				cmd = result;
-			}
-			else
-			{
-				int[] srcvec = new int[splitValues.length];
-				int[] invec = new int[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Integer.parseInt(splitSrc[i]);		
-					invec[i] = Integer.parseInt(splitValues[i]);
-					result = ("" + result + (srcvec[i]+invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);	
-				cmd = result;
-			}
-		}
-		else if(splited[1].equals("-"))
-		{	
-			String[] splitSrc = Aurelius.interpret(splited[0],props).split(",");
-			String[] splitValues = splited[2].split(",");
-			if(splited[2].contains("."))
-			{
-				double[] srcvec = new double[splitValues.length];
-				double[] invec = new double[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Double.parseDouble(splitSrc[i]);		
-					invec[i] = Double.parseDouble(splitValues[i]);
-					result = ("" + result + (srcvec[i]-invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);
-				cmd = result;
-			}
-			else
-			{
-				int[] srcvec = new int[splitValues.length];
-				int[] invec = new int[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Integer.parseInt(splitSrc[i]);		
-					invec[i] = Integer.parseInt(splitValues[i]);
-					result = ("" + result + (srcvec[i]-invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);	
-				cmd = result;
-			}
-		}
-		else if(splited[1].equals("/"))
-		{	
-			String[] splitSrc = Aurelius.interpret(splited[0],props).split(",");
-			String[] splitValues = splited[2].split(",");
-			if(splited[2].contains("."))
-			{
-				double[] srcvec = new double[splitValues.length];
-				double[] invec = new double[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Double.parseDouble(splitSrc[i]);		
-					invec[i] = Double.parseDouble(splitValues[i]);
-					result = ("" + result + (srcvec[i]/invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);
-				cmd = result;
-			}
-			else
-			{
-				int[] srcvec = new int[splitValues.length];
-				int[] invec = new int[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Integer.parseInt(splitSrc[i]);		
-					invec[i] = Integer.parseInt(splitValues[i]);
-					result = ("" + result + (srcvec[i]/invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);	
-				cmd = result;
-			}
-		}
-		else if(splited[1].equals("*"))
-		{	
-			String[] splitSrc = Aurelius.interpret(splited[0],props).split(",");
-			String[] splitValues = splited[2].split(",");
-			if(splited[2].contains("."))
-			{
-				double[] srcvec = new double[splitValues.length];
-				double[] invec = new double[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Double.parseDouble(splitSrc[i]);		
-					invec[i] = Double.parseDouble(splitValues[i]);
-					result = ("" + result + (srcvec[i]*invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);
-				cmd = result;
-			}
-			else
-			{
-				int[] srcvec = new int[splitValues.length];
-				int[] invec = new int[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Integer.parseInt(splitSrc[i]);		
-					invec[i] = Integer.parseInt(splitValues[i]);
-					result = ("" + result + (srcvec[i]*invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);	
-				cmd = result;
-			}
-		}
-		else if(splited[1].equals("%"))
-		{	
-			String[] splitSrc = Aurelius.interpret(splited[0],props).split(",");
-			String[] splitValues = splited[2].split(",");
-			if(splited[2].contains("."))
-			{
-				double[] srcvec = new double[splitValues.length];
-				double[] invec = new double[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Double.parseDouble(splitSrc[i]);		
-					invec[i] = Double.parseDouble(splitValues[i]);
-					result = ("" + result + (srcvec[i]*invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);
-				cmd = result;
-			}
-			else
-			{
-				int[] srcvec = new int[splitValues.length];
-				int[] invec = new int[splitValues.length];
-				String result = new String();
-				for(int i = 0; i<splitValues.length;i++)
-				{
-					srcvec[i] = Integer.parseInt(splitSrc[i]);		
-					invec[i] = Integer.parseInt(splitValues[i]);
-					result = ("" + result + (srcvec[i]*invec[i]) + ",");
-				}
-				Aurelius.interpret((splited[0] + " " + result),props);	
-				cmd = result;
-			}
+		String[] valores = splited[2].split(",");
+		
+		if(splited[1].contains("+"))
+		{
+			
 		}
 		return cmd;
 	}
