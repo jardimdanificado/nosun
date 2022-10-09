@@ -1,7 +1,5 @@
 package obiectiv;
-import java.util.ArrayList;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
+import exp4j.*;
 
 public class Pitagoras
 {
@@ -19,11 +17,6 @@ public class Pitagoras
 		String cmd = "";
 		String[] splited = inCmd.split(" ");
 		String[] valores = splited[2].split(",");
-		
-		if(splited[1].contains("+"))
-		{
-			
-		}
 		return cmd;
 	}
 }
