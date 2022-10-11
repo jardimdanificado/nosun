@@ -6,6 +6,8 @@
 
 .replit
 
+.breakpoints
+
 *.ctxt
 
 .mtj.tmp/
