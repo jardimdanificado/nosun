@@ -30,13 +30,13 @@ public class Aurelius {
 					System.out.println(props.get(i).value);
 					return (props.get(i).value);
 				}
-		}
-		if (splited[1].equals("=")) {
+		} else if (splited[1].equals("=")) {
 			Property lobj = new Property("nd", "nd", "nd");
 			for (int i = 0; i < props.size(); i++)
 				if (splited[0].equals(lobj.name))
 					lobj = props.get(i);
 			if (lobj.name.equals("nd"))
+
 				return "object not found";
 			if (splited[2].charAt(0) == '$') {
 				for (int k = 0; k < props.size(); k++)
@@ -52,26 +52,19 @@ public class Aurelius {
 						return (lobj.value);
 					}
 				return ("second object not found");
-			} else if (splited[2].contains("{")) {
+			} else if (str.contains("{")) {
 				for (int i = 0; i < props.size(); i++)
 					str = str.replace(("$" + lobj.name), lobj.value);
-				lobj.value = "" + Pitagoras.eval(str.substring(str.indexOf("{") + 1, str.indexOf( }")));
-			}
-			 else if(Character.isDigit(splited[2].charAt (0))| |splited[2].charAt(0) == '-'||spl
-					it ed[2].charAt(0) == '+') {
+				lobj.value = "" + Pitagoras.eval(str.substring(str.indexOf("{") + 1, str.indexOf("}")));
+			} else if (Character.isDigit(splited[2].charAt(0)) || splited[2].charAt(0) == '-'
+					|| splited[2].charAt(0) == '+') {
 				lobj.value = "" + Pitagoras.eval(str.substring(str.indexOf("=") + 1, str.indexOf("}")));
 			} else {
 				lobj.value = splited[2];
 			}
-		} else if (splited[0].equals("set")) {
-			for (int i = 0; i < props.size(); i++)
-				if (splited[1].equals(props.get(i).name)) {
-					props.get(i).value = splited[2];
-					return (cmd);
-				}
 		} else if (splited[0].equals("new")) {
 			if (splited[1].equals("function")) {
-				String locfunc = str.substring(str.indexOf("(") + 1, str.indexOf(")"));
+				String locfunc = str.substring(str.indexOf("{") + 1, str.indexOf("}"));
 				Property lobj = new Property(splited[2], splited[1], locfunc);
 				props.add(lobj);
 				return locfunc;
