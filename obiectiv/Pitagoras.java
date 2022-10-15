@@ -1,26 +1,32 @@
 package obiectiv;
 
-public class Pitagoras {
-	public static double eval(final String str) {
-		// this eval methods are from a anonymous
-		return new Object() {
+public class Pitagoras 
+{
+	public static double eval(final String str) 
+	{
+		return new Object() 
+		{
 			int pos = -1, ch;
 
-			void nextChar() {
+			void nextChar() 
+			{
 				ch = (++pos < str.length()) ? str.charAt(pos) : -1;
 			}
 
-			boolean eat(int charToEat) {
+			boolean eat(int charToEat) 
+			{
 				while (ch == ' ')
 					nextChar();
-				if (ch == charToEat) {
+				if (ch == charToEat) 
+				{
 					nextChar();
 					return true;
 				}
 				return false;
 			}
 
-			double parse() {
+			double parse() 
+			{
 				nextChar();
 				double x = parseExpression();
 				if (pos < str.length())
@@ -35,9 +41,11 @@ public class Pitagoras {
 			// | functionName `(` expression `)` | functionName factor
 			// | factor `^` factor
 
-			double parseExpression() {
+			double parseExpression() 
+			{
 				double x = parseTerm();
-				for (;;) {
+				for (;;) 
+				{
 					if (eat('+'))
 						x += parseTerm(); // addition
 					else if (eat('-'))
@@ -47,9 +55,11 @@ public class Pitagoras {
 				}
 			}
 
-			double parseTerm() {
+			double parseTerm() 
+			{
 				double x = parseFactor();
-				for (;;) {
+				for (;;) 
+				{
 					if (eat('*'))
 						x *= parseFactor(); // multiplication
 					else if (eat('/'))
@@ -59,7 +69,8 @@ public class Pitagoras {
 				}
 			}
 
-			double parseFactor() {
+			double parseFactor() 
+			{
 				if (eat('+'))
 					return +parseFactor(); // unary plus
 				if (eat('-'))
@@ -67,23 +78,31 @@ public class Pitagoras {
 
 				double x;
 				int startPos = this.pos;
-				if (eat('(')) { // parentheses
+				if (eat('(')) 
+				{ // parentheses
 					x = parseExpression();
 					if (!eat(')'))
 						throw new RuntimeException("Missing ')'");
-				} else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+				} 
+				else if ((ch >= '0' && ch <= '9') || ch == '.') 
+				{ // numbers
 					while ((ch >= '0' && ch <= '9') || ch == '.')
 						nextChar();
 					x = Double.parseDouble(str.substring(startPos, this.pos));
-				} else if (ch >= 'a' && ch <= 'z') { // functions
+				}
+				else if (ch >= 'a' && ch <= 'z') 
+				{ // functions
 					while (ch >= 'a' && ch <= 'z')
 						nextChar();
 					String func = str.substring(startPos, this.pos);
-					if (eat('(')) {
+					if (eat('(')) 
+					{
 						x = parseExpression();
 						if (!eat(')'))
 							throw new RuntimeException("Missing ')' after argument to " + func);
-					} else {
+					} 
+					else 
+					{
 						x = parseFactor();
 					}
 					if (func.equals("sqrt"))
@@ -96,7 +115,9 @@ public class Pitagoras {
 						x = Math.tan(Math.toRadians(x));
 					else
 						throw new RuntimeException("Unknown function: " + func);
-				} else {
+				} 
+				else 
+				{
 					throw new RuntimeException("Unexpected: " + (char) ch);
 				}
 

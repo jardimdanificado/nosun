@@ -1,76 +1,72 @@
 package obiectiv;
 
-import java.util.ArrayList;
+public class Aurelius 
+{
+	private class Format 
+	{
+		class Print 
+		{
+			static String system(String str) 
+			{
+				return ("print.system->" + str);
+			}
+		}
+	}
 
-public class Aurelius {
-	public static String interpret(String str, ArrayList<Property> props) {
+	public static String interpret(String str, PropertyList list) 
+	{
 		String cmd = "0";
-		String[] splited = str.split(" ");
-		if (str.contains("exit"))
-			return "exit";
-		else if (splited[0].equals("run")) {
-			for (int i = 0; i < props.size(); i++)
-				if (props.get(i).name.equals(splited[1]))
-					if (props.get(i).type.equals("function")) {
-						String lcmd = props.get(i).value + " ";
-						lcmd = lcmd.replace("out", splited[2]);
-						if (splited.length == 4)
-							lcmd = lcmd.replace("in", splited[3]);
-						System.out.println(lcmd);
-						return Aurelius.interpret(lcmd, props);
-					} else
-						System.out.println(splited[1] + " is not a function.");
-		} else if (splited[0].equals("delete")) {
-			for (int i = 0; i < props.size(); i++)
-				if (props.get(i).name.equals(splited[1]))
-					props.remove(i);
-		} else if (splited[0].equals("get")) {
-			for (int i = 0; i < props.size(); i++)
-				if (splited[1].equals(props.get(i).name)) {
-					System.out.println(props.get(i).value);
-					return (props.get(i).value);
-				}
-		} else if (splited[1].equals("=")) {
-			Property lobj = new Property("nd", "nd", "nd");
-			for (int i = 0; i < props.size(); i++)
-				if (splited[0].equals(lobj.name))
-					lobj = props.get(i);
-			if (lobj.name.equals("nd"))
+		String[] splited = str.split("\\s+");
+		if (splited.length == 1) 
+		{
+			str = str.replace("\\s+", "");
+			if (!str.contains("(")) 
+			{
+				Property found = list.find(str);
+				if (found.name == "nd")
+					return "404";
+				else
+					return (Format.Print.system(found.value));
+			}
+		}
+		else if (str.contains("=")) 
+		{
+			Property found;
+			if (splited[2].equals("=")) 
+			{
+				Property input = Property.fromString(str);
+				found = list.find(input.name);
 
-				return "object not found";
-			if (splited[2].charAt(0) == '$') {
-				for (int k = 0; k < props.size(); k++)
-					if (splited[2].equals("$" + props.get(k).name)) {
-						lobj.value = "" + props.get(k).value;
-						return (lobj.value);
-					}
-				return ("second object not found");
-			} else if (splited[2].charAt(0) == '@') {
-				for (int k = 0; k < props.size(); k++)
-					if (splited[2].equals("@" + props.get(k).name)) {
-						lobj.value = props.get(k).value;
-						return (lobj.value);
-					}
-				return ("second object not found");
-			} else if (str.contains("{")) {
-				for (int i = 0; i < props.size(); i++)
-					str = str.replace(("$" + lobj.name), lobj.value);
-				lobj.value = "" + Pitagoras.eval(str.substring(str.indexOf("{") + 1, str.indexOf("}")));
-			} else if (Character.isDigit(splited[2].charAt(0)) || splited[2].charAt(0) == '-'
-					|| splited[2].charAt(0) == '+') {
-				lobj.value = "" + Pitagoras.eval(str.substring(str.indexOf("=") + 1, str.indexOf("}")));
-			} else {
-				lobj.value = splited[2];
+				if(input.type.equals("eval") || input.type.equals("evaluate"))
+				{
+					input.value = Pitagoras.eval(input.value) + "";
+					input.type = "double";
+				}
+					
+				if (found.name.equals("nd"))
+					list.add(input);
+				else
+					found = input;
+			} 
+			else if (splited.length >= 3)
+				if (splited[1].equals("=")) 
+				{
+					found = list.find(splited[0]);
+					found.value = str.replace("\\s+","").substring(str.indexOf("=")+1,str.replace("\\s+","").length());
+					if (found.name.equals("nd"))
+						return (Format.Print.system("\"" + splited[0] + "\" doesn't exist."));
+					
+				} 
+				else
+					return (Format.Print.system("couldn't understand this command."));
+		} 
+		else if (splited[0].equals("eval")) 
+		{
+			Property found = list.find(splited[1]);
+			if (found.name != "nd") 
+			{
+				found.value = Pitagoras.eval(found.value) + "";
 			}
-		} else if (splited[0].equals("new")) {
-			if (splited[1].equals("function")) {
-				String locfunc = str.substring(str.indexOf("{") + 1, str.indexOf("}"));
-				Property lobj = new Property(splited[2], splited[1], locfunc);
-				props.add(lobj);
-				return locfunc;
-			}
-			Property lobj = new Property(splited[2], splited[1], splited[3]);
-			props.add(lobj);
 		}
 		return cmd;
 	}
